@@ -1,7 +1,7 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import { data } from '../data/site';
-import { getLangFromUrl, useTranslations } from '../utils/i18n';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { data } from '../../data/site';
+import { getLangFromUrl, useTranslations } from '../../utils/i18n';
 
 const lang = getLangFromUrl(Astro.url);
 const { profile, resume } = data[lang];

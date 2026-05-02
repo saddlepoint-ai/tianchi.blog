@@ -1,5 +1,6 @@
 ---
-import { navItems, site } from '../data/site';
+import { data } from '../data/site';
+import { getLangFromUrl, useTranslations } from '../utils/i18n';
 
 interface Props {
   title?: string;
@@ -8,20 +9,29 @@ interface Props {
   publishedTime?: string;
 }
 
+const lang = getLangFromUrl(Astro.url);
+const siteData = data[lang].site;
+const navItems = data[lang].navItems;
+const t = useTranslations(lang);
+
 const {
-  title = site.title,
-  description = site.description,
+  title = siteData.title,
+  description = siteData.description,
   ogType = 'website',
   publishedTime,
 } = Astro.props;
 
-const pageTitle = title === site.title ? title : `${title} | ${site.title}`;
+const pageTitle = title === siteData.title ? title : `${title} | ${siteData.title}`;
 const currentPath = Astro.url.pathname;
 const socialImage = new URL('/social-card.svg', Astro.site ?? Astro.url).toString();
+
+const togglePath = lang === 'en' 
+  ? `/zh${currentPath === '/' ? '' : currentPath}` 
+  : currentPath.replace(/^\/zh/, '') || '/';
 ---
 
 <!doctype html>
-<html lang="en" class="dark">
+<html lang={lang} class="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -38,7 +48,7 @@ const socialImage = new URL('/social-card.svg', Astro.site ?? Astro.url).toStrin
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImage} />
     {publishedTime && <meta property="article:published_time" content={publishedTime} />}
-    {ogType === 'article' && <meta property="article:author" content={site.author} />}
+    {ogType === 'article' && <meta property="article:author" content={siteData.author} />}
     <link rel="canonical" href={Astro.url.href} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
@@ -48,9 +58,9 @@ const socialImage = new URL('/social-card.svg', Astro.site ?? Astro.url).toStrin
     <a class="skip-link" href="#main">Skip to content</a>
     <div class="site-shell">
       <header class="site-header">
-        <a class="brand" href="/" aria-label={`${site.title} home`}>
+        <a class="brand" href={lang === 'en' ? '/' : '/zh/'} aria-label={`${siteData.title} home`}>
           <span class="brand-text">
-            <strong>{site.title}</strong>
+            <strong>{siteData.title}</strong>
           </span>
         </a>
         <nav aria-label="Primary navigation" class="primary-nav">
@@ -61,7 +71,7 @@ const socialImage = new URL('/social-card.svg', Astro.site ?? Astro.url).toStrin
                 class:list={[
                   'nav-link',
                   currentPath === item.href ||
-                  (item.href !== '/' && currentPath.startsWith(item.href))
+                  (item.href !== '/' && item.href !== '/zh/' && currentPath.startsWith(item.href))
                     ? 'is-active'
                     : '',
                 ]}
@@ -70,6 +80,9 @@ const socialImage = new URL('/social-card.svg', Astro.site ?? Astro.url).toStrin
               </a>
             ))
           }
+          <a href={togglePath} class="nav-link lang-toggle" aria-label="Toggle language">
+            {lang === 'en' ? '中' : 'EN'}
+          </a>
         </nav>
       </header>
 
@@ -79,7 +92,7 @@ const socialImage = new URL('/social-card.svg', Astro.site ?? Astro.url).toStrin
 
       <footer class="site-footer">
         <div class="site-footer-inner">
-          <p class="copyright">© {new Date().getFullYear()} {site.author}. All systems nominal.</p>
+          <p class="copyright">© {new Date().getFullYear()} {siteData.author}. {t('footer.copyright')}</p>
         </div>
       </footer>
     </div>
@@ -230,6 +243,14 @@ const socialImage = new URL('/social-card.svg', Astro.site ?? Astro.url).toStrin
     color: var(--text-strong);
     background: var(--panel-tinted);
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+  }
+  
+  .lang-toggle {
+    font-family: var(--font-mono);
+    border-left: 1px solid var(--line);
+    border-radius: 0;
+    margin-left: 4px;
+    padding-left: 16px;
   }
 
   /* Core UI Primitives */
