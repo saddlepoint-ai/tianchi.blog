@@ -2,363 +2,241 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { profile, resume, timeline } from '../data/site';
 
-const affiliations = [
-  'HKU',
-  'Google',
-  'Ant Group',
-  'Minimax',
-  'ACM-ICPC',
-  'KDD',
-  'WSDM',
-  'SIGIR',
-  'NeurIPS',
-  'LSE',
-];
 ---
 
 <BaseLayout
   title="Resume"
   description="Tianchi Cai — Founder & CEO. Resume covering LLMs, reinforcement learning, RAG, and large-scale optimization."
 >
-  <section>
+  <section class="fade-up">
     <p class="eyebrow">Resume</p>
-    <h1 class="page-title">{profile.name}</h1>
-    <p class="resume-headline">{profile.headline}</p>
+    <h1 class="page-title">{profile.name}.</h1>
     <p class="lead">{resume.summary}</p>
   </section>
 
-  <section class="section">
-    <div class="resume-grid">
+  <section class="section fade-up" style="animation-delay: 0.1s">
+    <div class="resume-layout">
       <div class="resume-main">
-        <div class="resume-block">
-          <p class="eyebrow">Now</p>
-          <article class="card card-current">
-            <p class="eyebrow is-muted">{resume.current.period}</p>
-            <h2>{resume.current.role}</h2>
-            <p class="card-company">{resume.current.company}</p>
-            <ul>
-              {resume.current.details.map((d) => <li>{d}</li>)}
-            </ul>
-          </article>
-        </div>
-
-        <div class="resume-block">
-          <p class="eyebrow">Experience</p>
-          <div class="article-list">
-            {
-              resume.experience.map((item) => (
-                <article class="card">
-                  <p class="eyebrow is-muted">{item.period}</p>
-                  <h2>{item.role}</h2>
-                  <p class="card-company">{item.company}</p>
-                  <ul>
-                    {item.details.map((detail) => <li>{detail}</li>)}
-                  </ul>
-                </article>
-              ))
-            }
+        
+        <div class="resume-section">
+          <h2 class="section-title">Current</h2>
+          <div class="resume-item current">
+            <div class="meta">
+              <span class="period">{resume.current.period}</span>
+            </div>
+            <div class="content">
+              <h3>{resume.current.role}</h3>
+              <div class="company">{resume.current.company}</div>
+              <ul>
+                {resume.current.details.map((d) => <li>{d}</li>)}
+              </ul>
+            </div>
           </div>
         </div>
 
-        <div class="resume-block">
-          <p class="eyebrow">Education</p>
-          <div class="article-list">
-            {
-              resume.education.map((item) => (
-                <article class="card">
-                  <p class="eyebrow is-muted">{item.period}</p>
-                  <h2>{item.school}</h2>
-                  <p class="card-company">{item.degree}</p>
+        <div class="resume-section">
+          <h2 class="section-title">Experience</h2>
+          {
+            resume.experience.map((item) => (
+              <div class="resume-item">
+                <div class="meta">
+                  <span class="period">{item.period}</span>
+                </div>
+                <div class="content">
+                  <h3>{item.role}</h3>
+                  <div class="company">{item.company}</div>
                   <ul>
                     {item.details.map((detail) => <li>{detail}</li>)}
                   </ul>
-                </article>
-              ))
-            }
-          </div>
+                </div>
+              </div>
+            ))
+          }
         </div>
+
+        <div class="resume-section">
+          <h2 class="section-title">Education</h2>
+          {
+            resume.education.map((item) => (
+              <div class="resume-item">
+                <div class="meta">
+                  <span class="period">{item.period}</span>
+                </div>
+                <div class="content">
+                  <h3>{item.school}</h3>
+                  <div class="company">{item.degree}</div>
+                  <ul>
+                    {item.details.map((detail) => <li>{detail}</li>)}
+                  </ul>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
       </div>
 
-      <aside class="resume-side">
-        <div class="side-panel">
-          <p class="eyebrow is-mint">Fun fact</p>
-          <p class="fun-fact">🚣 {resume.funFact}</p>
-        </div>
-
-        <div class="side-panel">
-          <p class="eyebrow is-secondary">Selected papers</p>
-          <ol class="paper-list">
-            {
-              resume.publications.map((p) => (
-                <li>
-                  <p class="paper-title">{p.title}</p>
-                  <p class="paper-venue">{p.venue}</p>
-                </li>
-              ))
-            }
-          </ol>
-        </div>
-
-        <div class="side-panel">
-          <p class="eyebrow">Skills</p>
+      <aside class="resume-sidebar">
+        <div class="sidebar-block">
+          <h3>Skills</h3>
           <div class="tag-list">
             {resume.skills.map((skill) => <span class="tag">{skill}</span>)}
           </div>
         </div>
 
-        <div class="side-panel">
-          <p class="eyebrow is-muted">Affiliations</p>
-          <div class="affiliation-list">
-            {affiliations.map((name) => <span class="affiliation">{name}</span>)}
-          </div>
+        <div class="sidebar-block">
+          <h3>Selected Papers</h3>
+          <ul class="paper-list">
+            {
+              resume.publications.map((p) => (
+                <li>
+                  <div class="paper-title">{p.title}</div>
+                  <div class="paper-venue">{p.venue}</div>
+                </li>
+              ))
+            }
+          </ul>
         </div>
       </aside>
     </div>
   </section>
-
-  <section class="section">
-    <div class="section-heading">
-      <div>
-        <p class="eyebrow">Timeline</p>
-        <h2>Career path</h2>
-      </div>
-    </div>
-    <ol class="timeline" aria-label="Career timeline">
-      {
-        timeline.map((step) => (
-          <li class="timeline-item">
-            <p class="timeline-period">{step.period}</p>
-            <p class="timeline-label">{step.label}</p>
-            <p class="timeline-sub">{step.sub}</p>
-          </li>
-        ))
-      }
-    </ol>
-  </section>
 </BaseLayout>
 
 <style>
-  .resume-headline {
-    margin: 14px 0 0;
-    color: var(--text-strong);
-    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
-    font-weight: 600;
-    letter-spacing: -0.01em;
-  }
-
-  .resume-grid {
+  .resume-layout {
     display: grid;
-    grid-template-columns: minmax(0, 1.6fr) minmax(280px, 1fr);
-    gap: 32px;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 64px;
     align-items: start;
   }
 
-  .resume-main {
+  .resume-section {
+    margin-bottom: 64px;
+  }
+
+  .section-title {
+    font-size: 1.5rem;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 16px;
+    color: var(--text-strong);
+  }
+
+  .resume-item {
     display: grid;
-    gap: 36px;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
   }
 
-  .resume-block .eyebrow {
-    margin-bottom: 14px;
+  .resume-item.current {
+    position: relative;
   }
 
-  .resume-block .article-list {
-    gap: 14px;
+  .resume-item.current::before {
+    content: '';
+    position: absolute;
+    left: -24px;
+    top: 6px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
   }
 
-  .card-current {
-    border-left: 4px solid var(--accent);
+  .meta .period {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--muted);
   }
 
-  .card-company {
-    margin: 2px 0 0;
-    color: var(--accent-strong);
-    font-size: 0.92rem;
-    font-weight: 600;
-    letter-spacing: 0.005em;
+  .content h3 {
+    font-size: 1.2rem;
+    margin-bottom: 4px;
   }
 
-  .card h2 {
-    margin: 6px 0 0;
-    font-size: 1.18rem;
-    font-weight: 700;
-  }
-
-  .resume-side {
-    display: grid;
-    gap: 20px;
-    position: sticky;
-    top: 96px;
-  }
-
-  .side-panel {
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    padding: 20px 22px;
-    background: var(--panel);
-    box-shadow: var(--shadow-card);
-  }
-
-  .fun-fact {
-    margin: 0;
-    color: var(--text);
+  .content .company {
+    color: var(--accent);
     font-size: 0.95rem;
-    line-height: 1.55;
-    font-style: italic;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .content ul {
+    margin: 0;
+    padding-left: 16px;
+    color: var(--text);
+  }
+
+  .content li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  .content li::marker {
+    color: var(--line-strong);
+  }
+
+  .resume-sidebar {
+    position: sticky;
+    top: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .sidebar-block h3 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 24px;
+    font-family: var(--font-mono);
   }
 
   .paper-list {
-    margin: 0;
-    padding: 0;
     list-style: none;
-    display: grid;
-    gap: 14px;
-    counter-reset: paper;
-  }
-
-  .paper-list li {
-    position: relative;
-    padding-left: 26px;
-    counter-increment: paper;
-  }
-
-  .paper-list li::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 22px;
-    color: var(--accent-strong);
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.04em;
-    content: counter(paper, decimal-leading-zero);
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
   }
 
   .paper-title {
-    margin: 0;
     color: var(--text-strong);
     font-size: 0.95rem;
-    font-weight: 600;
     line-height: 1.4;
+    margin-bottom: 6px;
+    font-weight: 500;
   }
 
   .paper-venue {
-    margin: 4px 0 0;
-    color: var(--secondary-strong);
+    color: var(--secondary);
+    font-family: var(--font-mono);
     font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
   }
 
-  .affiliation-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-
-  .affiliation {
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 4px 10px;
-    background: var(--panel-tinted);
-    color: var(--text-strong);
-    font-family: var(--font-serif);
-    font-size: 0.82rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-  }
-
-  /* Timeline (mirrors home page) */
-  .timeline {
-    display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 0;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    background: var(--panel);
-    box-shadow: var(--shadow-card);
-    overflow: hidden;
-  }
-
-  .timeline-item {
-    position: relative;
-    padding: 22px 20px;
-    border-right: 1px solid var(--line);
-  }
-
-  .timeline-item:last-child {
-    border-right: 0;
-  }
-
-  .timeline-item::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 28px;
-    height: 3px;
-    background: var(--accent);
-    content: '';
-  }
-
-  .timeline-period {
-    margin: 0 0 10px;
-    color: var(--accent-strong);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-
-  .timeline-label {
-    margin: 0;
-    color: var(--text-strong);
-    font-size: 1.04rem;
-    font-weight: 700;
-    line-height: 1.25;
-  }
-
-  .timeline-sub {
-    margin: 4px 0 0;
-    color: var(--muted);
-    font-size: 0.88rem;
-  }
-
-  @media (max-width: 980px) {
-    .resume-grid {
+  @media (max-width: 960px) {
+    .resume-layout {
       grid-template-columns: 1fr;
+      gap: 48px;
     }
-    .resume-side {
+    
+    .resume-sidebar {
       position: static;
     }
   }
 
-  @media (max-width: 920px) {
-    .timeline {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    .timeline-item {
-      border-right: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-    .timeline-item:nth-child(2n) {
-      border-right: 0;
-    }
-  }
-
-  @media (max-width: 540px) {
-    .timeline {
+  @media (max-width: 600px) {
+    .resume-item {
       grid-template-columns: 1fr;
+      gap: 8px;
     }
-    .timeline-item {
-      border-right: 0;
-      border-bottom: 1px solid var(--line);
-    }
-    .timeline-item:last-child {
-      border-bottom: 0;
+    
+    .resume-item.current::before {
+      display: none;
     }
   }
 </style>

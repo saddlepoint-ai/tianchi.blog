@@ -1,88 +1,37 @@
 ---
-import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { profile, timeline, site } from '../data/site';
-import { formatDate } from '../utils/date';
 
-const posts = (await getCollection('blog'))
-  .filter((post) => !post.data.draft)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-  .slice(0, 3);
+// We map timeline to a cleaner layout
 ---
 
 <BaseLayout title={site.title} description={site.description}>
-  <section class="hero">
-    <div>
-      <p class="eyebrow">{profile.role}</p>
-      <h1>{profile.name}</h1>
-      <p class="lead">{profile.intro}</p>
-      <div class="tag-list" aria-label="Focus areas">
-        {profile.focusAreas.map((area) => <span class="tag">{area}</span>)}
-      </div>
-      <p class="hero-meta">{profile.location}</p>
+  <section class="hero fade-up">
+    <p class="eyebrow">{profile.role}</p>
+    <h1 class="page-title">{profile.name}.</h1>
+    <p class="lead">
+      Founder & CEO. Formerly led RL & RAG at Ant Group and trained models at Minimax. 
+      Writing about <code>agent-harnesses</code>, <code>RL</code>, and <code>context-engineering</code>.
+    </p>
+    <div class="tag-list">
+      {profile.focusAreas.map((area) => <span class="tag">{area}</span>)}
     </div>
-    <aside class="panel">
-      <p class="eyebrow is-secondary">Snapshot</p>
-      <h2>{profile.headline}</h2>
-      <ul>
-        {
-          profile.highlights.map((item) => (
-            <li>
-              <strong>{item.label}.</strong> {item.detail}
-            </li>
-          ))
-        }
-      </ul>
-      <p class="panel-fact">🚣 {profile.funFact}</p>
-      <a class="panel-cta" href="/resume/">Read the full resume →</a>
-    </aside>
   </section>
 
-  <section class="section">
+  <section class="section fade-up" style="animation-delay: 0.1s">
     <div class="section-heading">
-      <div>
-        <span class="section-badge" aria-hidden="true">A</span>
-        <div>
-          <p class="eyebrow">Track record</p>
-          <h2>Where I've worked</h2>
-        </div>
-      </div>
-      <a href="/resume/">Resume →</a>
+      <h2>Experience.</h2>
     </div>
-    <ol class="timeline" aria-label="Career timeline">
+    <div class="track-record">
       {
         timeline.map((step) => (
-          <li class="timeline-item">
-            <p class="timeline-period">{step.period}</p>
-            <p class="timeline-label">{step.label}</p>
-            <p class="timeline-sub">{step.sub}</p>
-          </li>
-        ))
-      }
-    </ol>
-  </section>
-
-  <section class="section">
-    <div class="section-heading">
-      <div>
-        <span class="section-badge is-secondary" aria-hidden="true">B</span>
-        <div>
-          <p class="eyebrow is-secondary">Notebook</p>
-          <h2>Latest writing</h2>
-        </div>
-      </div>
-      <a href="/blog/">All posts →</a>
-    </div>
-    <div class="article-list">
-      {
-        posts.map((post) => (
-          <a class="article-link" href={`/blog/${post.id}/`}>
-            <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
-            <span>
-              <h3>{post.data.title}</h3>
-              <p>{post.data.description}</p>
-            </span>
-          </a>
+          <div class="track-item">
+            <div class="track-period">{step.period}</div>
+            <div class="track-content">
+              <h3>{step.label}</h3>
+              <p>{step.sub}</p>
+            </div>
+          </div>
         ))
       }
     </div>
@@ -90,129 +39,57 @@ const posts = (await getCollection('blog'))
 </BaseLayout>
 
 <style>
-  .hero-meta {
-    margin: 22px 0 0;
-    color: var(--muted);
-    font-size: 0.9rem;
-    letter-spacing: 0.02em;
+  .hero {
+    padding-top: 40px;
   }
 
-  .panel ul {
-    margin: 18px 0 0;
+  .track-record {
+    display: flex;
+    flex-direction: column;
   }
 
-  .panel li {
-    color: var(--muted);
-    font-size: 0.95rem;
-    line-height: 1.55;
-  }
-
-  .panel li strong {
-    color: var(--text-strong);
-    font-weight: 700;
-  }
-
-  .panel-fact {
-    margin: 20px 0 0;
-    padding-top: 16px;
-    border-top: 1px solid var(--line);
-    color: var(--muted);
-    font-size: 0.9rem;
-    font-style: italic;
-  }
-
-  .panel-cta {
-    display: inline-block;
-    margin-top: 14px;
-    color: var(--accent-strong);
-    font-weight: 600;
-    font-size: 0.95rem;
-    text-decoration: none;
-  }
-
-  .timeline {
+  .track-item {
     display: grid;
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-    gap: 0;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    background: var(--panel);
-    box-shadow: var(--shadow-card);
-    overflow: hidden;
+    grid-template-columns: 180px 1fr;
+    gap: 24px;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--line);
+    transition: all 0.3s ease;
   }
 
-  .timeline-item {
-    position: relative;
-    padding: 22px 20px;
-    border-right: 1px solid var(--line);
+  .track-item:last-child {
+    border-bottom: none;
   }
 
-  .timeline-item:last-child {
-    border-right: 0;
+  .track-item:hover .track-period {
+    color: var(--accent);
   }
 
-  .timeline-item::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 28px;
-    height: 3px;
-    background: var(--accent);
-    content: '';
-  }
-
-  .timeline-period {
-    margin: 0 0 10px;
-    color: var(--accent-strong);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-  }
-
-  .timeline-label {
-    margin: 0;
-    color: var(--text-strong);
-    font-size: 1.04rem;
-    font-weight: 700;
-    line-height: 1.25;
-  }
-
-  .timeline-sub {
-    margin: 4px 0 0;
+  .track-period {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
     color: var(--muted);
-    font-size: 0.88rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
   }
 
-  @media (max-width: 920px) {
-    .timeline {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-    .timeline-item {
-      border-right: 1px solid var(--line);
-      border-bottom: 1px solid var(--line);
-    }
-    .timeline-item:nth-child(2n) {
-      border-right: 0;
-    }
-    .timeline-item:nth-last-child(-n + 1) {
-      border-bottom: 0;
-    }
+  .track-content h3 {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+    color: var(--text-strong);
   }
 
-  @media (max-width: 540px) {
-    .timeline {
+  .track-content p {
+    margin: 0;
+    color: var(--text);
+    font-size: 1rem;
+  }
+
+  @media (max-width: 600px) {
+    .track-item {
       grid-template-columns: 1fr;
-    }
-    .timeline-item {
-      border-right: 0;
-      border-bottom: 1px solid var(--line);
-    }
-    .timeline-item:last-child {
-      border-bottom: 0;
+      gap: 12px;
+      padding: 24px 0;
     }
   }
 </style>

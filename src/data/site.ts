@@ -1,10 +1,9 @@
 export const site = {
-  title: 'Tianchi Blog',
-  domain: 'tianchi.blog',
-  description:
-    'Tianchi Cai — founder, RL/RAG researcher, and rower. Notes on agent harnesses, context engineering, and spec-driven development.',
+  title: 'Tianchi',
+  domain: 'tianchi.dev',
+  description: 'Notes on LLMs, reinforcement learning, and agent workflows.',
   author: 'Tianchi Cai',
-  email: 'hello@tianchi.blog',
+  email: 'hello@tianchi.dev',
   social: {
     github: 'https://github.com/',
     linkedin: 'https://www.linkedin.com/',
@@ -22,10 +21,6 @@ export const profile = {
   role: 'Founder & CEO',
   headline: 'LLMs · Reinforcement Learning · RAG · Agent Harnesses',
   location: 'Hong Kong / Shanghai',
-  intro:
-    'I work at the intersection of LLMs, reinforcement learning, and retrieval. Previously led the RL & RAG team at Ant Group and trained chat models at Minimax. I write here about agent harnesses, context engineering, and spec-driven development — and occasionally about rowing.',
-  funFact:
-    'Passionate rower — dozens of national championships in the club division.',
   focusAreas: [
     'LLMs',
     'Reinforcement learning',
@@ -149,6 +144,4 @@ export const resume = {
     'Agent workflows',
     'Spec-driven development',
   ],
-  funFact:
-    'Passionate rower; dozens of national championships in the club division.',
 };

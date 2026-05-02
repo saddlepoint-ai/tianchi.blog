@@ -27,9 +27,11 @@ const showToc = tocHeadings.length >= 2;
   ogType="article"
   publishedTime={post.data.pubDate.toISOString()}
 >
-  <article class="post">
+  <article class="post fade-up">
     <header class="post-header">
-      <p class="eyebrow">Blog · {formatDate(post.data.pubDate, 'long')}</p>
+      <div class="post-meta">
+        <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate, 'long')}</time>
+      </div>
       <h1 class="post-title">{post.data.title}</h1>
       <p class="lead">{post.data.description}</p>
       <div class="tag-list">
@@ -37,24 +39,12 @@ const showToc = tocHeadings.length >= 2;
       </div>
     </header>
 
-    {
-      post.data.heroImage && (
-        <figure class="post-hero">
-          <img
-            src={post.data.heroImage}
-            alt={post.data.heroAlt ?? post.data.title}
-            loading="eager"
-          />
-        </figure>
-      )
-    }
-
     <div class:list={['post-layout', showToc ? 'has-toc' : '']}>
       {
         showToc && (
           <aside class="post-toc-aside">
             <nav class="toc-nav" aria-label="Table of contents">
-              <p class="toc-eyebrow">On this page</p>
+              <p class="toc-eyebrow">Contents</p>
               <ol class="toc-list">
                 {tocHeadings.map((heading) => (
                   <li class:list={['toc-item', `is-depth-${heading.depth}`]}>
@@ -70,22 +60,6 @@ const showToc = tocHeadings.length >= 2;
       }
 
       <div class="prose">
-        {
-          showToc && (
-            <details class="toc-mobile">
-              <summary>On this page</summary>
-              <nav aria-label="Table of contents">
-                <ol class="toc-list">
-                  {tocHeadings.map((heading) => (
-                    <li class:list={['toc-item', `is-depth-${heading.depth}`]}>
-                      <a href={`#${heading.slug}`} data-toc-link={heading.slug}>{heading.text}</a>
-                    </li>
-                  ))}
-                </ol>
-              </nav>
-            </details>
-          )
-        }
         <Content />
       </div>
     </div>
@@ -134,19 +108,192 @@ const showToc = tocHeadings.length >= 2;
   }
 </script>
 
-<style>
-  .post-hero {
-    margin: 28px 0 0;
-    padding: 0;
-    border: 1px solid var(--line);
-    border-radius: var(--radius-md);
-    background: var(--panel);
-    overflow: hidden;
-    box-shadow: var(--shadow-card);
+<style is:global>
+  .post-header {
+    margin-bottom: 64px;
+    max-width: 800px;
   }
-  .post-hero img {
+
+  .post-meta {
+    font-family: var(--font-mono);
+    color: var(--accent);
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+    letter-spacing: 0.05em;
+  }
+
+  .post-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.1;
+    margin-bottom: 24px;
+    letter-spacing: -0.03em;
+    background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .post-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 64px;
+    align-items: start;
+  }
+
+  @media (min-width: 1024px) {
+    .post-layout.has-toc {
+      grid-template-columns: 240px minmax(0, 1fr);
+    }
+  }
+
+  /* TOC Styles */
+  .post-toc-aside {
+    display: none;
+  }
+
+  @media (min-width: 1024px) {
+    .post-toc-aside {
+      display: block;
+      position: sticky;
+      top: 120px;
+    }
+  }
+
+  .toc-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+
+  .toc-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-left: 1px solid var(--line);
+  }
+
+  .toc-item a {
     display: block;
-    width: 100%;
+    padding: 4px 0 4px 16px;
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: all 0.2s;
+    border-left: 1px solid transparent;
+    margin-left: -1px;
+  }
+
+  .toc-item.is-depth-3 a {
+    padding-left: 24px;
+    font-size: 0.8rem;
+  }
+
+  .toc-item a:hover {
+    color: var(--text-strong);
+  }
+
+  .toc-item a.is-active {
+    color: var(--accent);
+    border-left-color: var(--accent);
+    font-weight: 500;
+  }
+
+  /* Prose Styles */
+  .prose {
+    max-width: 720px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  .prose > * + * {
+    margin-top: 1.5em;
+  }
+
+  .prose h2, .prose h3, .prose h4 {
+    color: var(--text-strong);
+    margin-top: 2em;
+    margin-bottom: 1em;
+    scroll-margin-top: 120px;
+  }
+
+  .prose h2 { font-size: 1.8rem; border-bottom: 1px solid var(--line); padding-bottom: 0.5em; }
+  .prose h3 { font-size: 1.4rem; }
+
+  .prose p { margin-top: 0; margin-bottom: 1.5em; }
+
+  .prose ul, .prose ol {
+    padding-left: 1.5em;
+    margin-bottom: 1.5em;
+  }
+
+  .prose li { margin-bottom: 0.5em; }
+  .prose li::marker { color: var(--muted); }
+
+  .prose a {
+    color: var(--text-strong);
+    text-decoration-color: var(--line-strong);
+  }
+  .prose a:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+
+  .prose blockquote {
+    margin: 2em 0;
+    padding: 1.5em 2em;
+    border-left: 2px solid var(--accent);
+    background: linear-gradient(90deg, rgba(74, 222, 128, 0.05) 0%, transparent 100%);
+    color: var(--text-strong);
+    font-style: italic;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .prose code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    background: rgba(255,255,255,0.05);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    color: var(--secondary);
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .prose pre {
+    background: #000000;
+    border: 1px solid var(--line-strong);
+    padding: 1.5em;
+    border-radius: var(--radius-md);
+    overflow-x: auto;
+    margin: 2em 0;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+  }
+
+  .prose pre code {
+    background: transparent;
+    padding: 0;
+    border: none;
+    color: inherit;
+    font-size: 0.9em;
+    line-height: 1.6;
+  }
+
+  .prose hr {
+    border: none;
+    border-top: 1px dashed var(--line-strong);
+    margin: 3em 0;
+  }
+
+  .prose img {
+    max-width: 100%;
     height: auto;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--line);
+    margin: 2em 0;
   }
 </style>

@@ -9,32 +9,107 @@ const posts = (await getCollection('blog'))
 
 ---
 
-<BaseLayout title="Blog" description="Essays, notes, project logs, and field reports.">
-  <section>
-    <p class="eyebrow">Blog</p>
-    <h1 class="page-title">Field notes.</h1>
+<BaseLayout title="Blog" description="Field notes on LLMs, agent harnesses, and spec-driven development.">
+  <section class="fade-up">
+    <p class="eyebrow">Notebook</p>
+    <h1 class="page-title">Signals.</h1>
     <p class="lead">
-      Essays on agent harnesses, context engineering, and spec-driven development. New posts arrive
-      whenever something is worth writing down.
+      Field notes on agent harnesses, context engineering, and spec-driven development.
     </p>
   </section>
 
-  <section class="section">
-    <div class="article-list">
+  <section class="section fade-up" style="animation-delay: 0.1s">
+    <div class="blog-grid">
       {
         posts.map((post) => (
-          <a class="article-link" href={`/blog/${post.id}/`}>
-            <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
-            <span>
+          <a class="blog-card" href={`/blog/${post.id}/`}>
+            <div class="blog-card-inner">
+              <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
               <h2>{post.data.title}</h2>
               <p>{post.data.description}</p>
-              <span class="tag-list">
+              <div class="tag-list">
                 {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
-              </span>
-            </span>
+              </div>
+            </div>
           </a>
         ))
       }
     </div>
   </section>
 </BaseLayout>
+
+<style>
+  .blog-grid {
+    display: grid;
+    gap: 24px;
+  }
+
+  .blog-card {
+    display: block;
+    text-decoration: none;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-lg);
+    padding: 32px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .blog-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.3), transparent);
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(168, 85, 247, 0.3);
+    background: var(--panel-tinted);
+    box-shadow: 0 20px 40px -20px rgba(0,0,0,0.8), 0 0 20px rgba(168, 85, 247, 0.05);
+  }
+
+  .blog-card:hover::before {
+    opacity: 1;
+  }
+
+  .blog-card time {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--secondary);
+    margin-bottom: 16px;
+  }
+
+  .blog-card h2 {
+    font-size: 1.6rem;
+    margin-bottom: 12px;
+    color: var(--text-strong);
+    transition: color 0.2s;
+  }
+
+  .blog-card:hover h2 {
+    color: #fff;
+  }
+
+  .blog-card p {
+    color: var(--text);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  @media (max-width: 600px) {
+    .blog-card {
+      padding: 24px;
+    }
+    
+    .blog-card h2 {
+      font-size: 1.3rem;
+    }
+  }
+</style>
