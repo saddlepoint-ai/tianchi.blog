@@ -2,8 +2,8 @@ export const site = {
   title: 'Tianchi Blog',
   domain: 'tianchi.blog',
   description:
-    'A personal field notebook for projects, ideas, interests, and long-form writing.',
-  author: 'Tianchi',
+    'Notes on AI agents, retrieval, reinforcement learning, development workflows, and rowing.',
+  author: 'Tianchi Cai',
   email: 'hello@tianchi.blog',
   social: {
     github: 'https://github.com/',
@@ -14,81 +14,88 @@ export const site = {
 export const navItems = [
   { href: '/', label: 'Home' },
   { href: '/resume/', label: 'Resume' },
-  { href: '/projects/', label: 'Projects' },
   { href: '/interests/', label: 'Interests' },
-  { href: '/now/', label: 'Now' },
   { href: '/blog/', label: 'Blog' },
 ];
 
 export const profile = {
-  name: 'Tianchi',
-  headline: 'Builder, researcher, and operator exploring AI-native tools.',
-  location: 'Shanghai / Remote',
+  name: 'Tianchi Cai',
+  headline:
+    'Founder and CEO working across LLMs, reinforcement learning, retrieval, and agentic development.',
+  location: 'Hong Kong / Shanghai',
   intro:
-    'I use this site as a public notebook: shipping notes, project write-ups, reading traces, and the ideas I want to keep thinking about.',
-  focusAreas: ['AI agents', 'Developer tools', 'Product systems', 'Personal knowledge workflows'],
+    'I use this site as a public notebook for AI systems, agent workflows, retrieval, reinforcement learning, and the occasional rowing note.',
+  focusAreas: ['LLMs', 'Reinforcement learning', 'Retrieval systems', 'Agent harnesses'],
 };
 
 export const resume = {
   summary:
-    'Personal resume content goes here. Replace these sections with your current role, work history, education, and the outcomes you want visitors to remember.',
-  experience: [
+    'Founder and CEO with hands-on experience in LLM applications, reinforcement learning, retrieval-augmented generation, large-scale marketing optimization, and agentic development workflows.',
+  education: [
     {
-      role: 'Founder / Product Builder',
-      company: 'Independent',
-      period: '2024 - Present',
+      school: 'The University of Hong Kong',
+      degree: 'B.A. Philosophy; Mathematics & Computer Science track',
+      period: '2013 - 2018',
       details: [
-        'Building prototypes around AI-assisted workflows and local-first productivity.',
-        'Exploring how agents can make knowledge work more executable.',
-      ],
-    },
-    {
-      role: 'Product and Engineering',
-      company: 'Previous Work',
-      period: 'Earlier',
-      details: [
-        'Led product discovery, technical implementation, and user feedback loops.',
-        'Worked across strategy, design, engineering, and operations.',
+        'ACM-ICPC Asian Gold Medalist.',
+        'Four-year scholarship recipient.',
+        'LSE summer school in microeconomics.',
       ],
     },
   ],
-  skills: ['Product strategy', 'Full-stack prototyping', 'AI tooling', 'Automation', 'Writing'],
+  experience: [
+    {
+      role: 'Founder & CEO',
+      company: 'Current venture',
+      period: '2024 - Present',
+      details: [
+        'Building AI-native products and workflows around LLMs, agents, and human-in-the-loop execution.',
+        'Exploring how Claude Code, harness design, and spec-driven development change software production.',
+      ],
+    },
+    {
+      role: 'Responsible for Xingye & Talkie chat models',
+      company: 'Minimax',
+      period: '2024 - 2025',
+      details: ['Aligned chat models to human preference and product requirements.'],
+    },
+    {
+      role: 'Lead, Reinforcement Learning & RAG Team',
+      company: 'Ant Group',
+      period: '2018 - 2024',
+      details: [
+        'Led work across reinforcement learning, RLHF, RAG, and large-scale ranking / decision systems.',
+        'Published 10+ papers, including work in RL, RLHF, RAG, and retrieval evaluation.',
+        'Worked on large-scale reinforcement learning for marketing budget allocation, saving billions of RMB each year.',
+        'Best paper runner-up for large-scale reinforcement learning in marketing.',
+      ],
+    },
+    {
+      role: 'Software Engineering Intern',
+      company: 'Google Ads',
+      period: '2017',
+      details: ['Full-stack SWE internship for Ads.'],
+    },
+  ],
+  publications: [
+    'FoRAG: Factuality-optimized Retrieval Augmented Generation for Web-enhanced Long-form Question Answering (KDD 2024).',
+    'Marketing budget allocation with offline constrained deep reinforcement learning (WSDM 2023 best paper runner-up).',
+    'Face4RAG: Factual Consistency Evaluation for Retrieval Augmented Generation in Chinese (KDD 2024).',
+    'MiniMax-M1: Scaling Test-Time Compute Efficiently with Lightning Attention.',
+    'Model-free Reinforcement Learning with Stochastic Reward Stabilization for Recommender Systems (SIGIR 2023).',
+    'Generalizing Consistent Multi-Class Classification (NeurIPS 2022).',
+  ],
+  skills: [
+    'LLMs',
+    'RLHF',
+    'RAG',
+    'Reinforcement learning',
+    'Marketing optimization',
+    'Agent workflows',
+  ],
 };
 
-export const projects = [
-  {
-    name: 'NodieSpace',
-    status: 'Active exploration',
-    description:
-      'An AI-native workspace concept for turning conversations, files, and tasks into coordinated project flow.',
-    tags: ['AI agents', 'Workspace', 'Productivity'],
-  },
-  {
-    name: 'Personal Blog System',
-    status: 'Live foundation',
-    description:
-      'A static publishing pipeline where Markdown notes become a fast, searchable personal site.',
-    tags: ['Astro', 'Markdown', 'Publishing'],
-  },
-  {
-    name: 'Research Notes',
-    status: 'Ongoing',
-    description:
-      'A collection of experiments, reading notes, and product observations around AI and developer experience.',
-    tags: ['Research', 'Writing', 'DX'],
-  },
-];
-
 export const interests = [
-  'AI agents and human-computer collaboration',
-  'Personal knowledge management',
-  'Developer experience and creative tools',
-  'Long-form writing, books, and reflective systems',
-  'Travel, coffee, and quiet places for thinking',
-];
-
-export const nowItems = [
-  'Designing a durable workflow for writing and shipping public notes.',
-  'Studying agentic coding patterns and where they break down in real products.',
-  'Collecting examples of useful personal websites, field notes, and digital gardens.',
+  'Rowing: national championship finalist and club-division competitor.',
+  'Rowing as a training system: rhythm, endurance, teamwork, and clean execution under fatigue.',
 ];

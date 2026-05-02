@@ -27,7 +27,7 @@ const socialImage = new URL('/social-card.svg', Astro.site ?? Astro.url).toStrin
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
-    <meta name="theme-color" content="#FAF6EF" />
+    <meta name="theme-color" content="#F6F7F9" />
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content={ogType} />
@@ -49,7 +49,6 @@ const socialImage = new URL('/social-card.svg', Astro.site ?? Astro.url).toStrin
     <div class="site-shell">
       <header class="site-header">
         <a class="brand" href="/" aria-label={`${site.title} home`}>
-          <span class="brand-mark" aria-hidden="true">天</span>
           <span class="brand-text">
             <strong>{site.author}</strong>
             <small>{site.domain}</small>
@@ -93,16 +92,16 @@ const socialImage = new URL('/social-card.svg', Astro.site ?? Astro.url).toStrin
   :root {
     color-scheme: light;
     /* Surfaces */
-    --bg: #faf6ef;
+    --bg: #f6f7f9;
     --bg-soft: #ffffff;
     --panel: #ffffff;
-    --panel-tinted: #f6efe2;
-    --panel-strong: #f1e7d4;
+    --panel-tinted: #eef1f4;
+    --panel-strong: #e4e8ee;
     /* Ink */
     --text: #1c1f24;
     --text-strong: #0f1218;
-    --muted: #6b6358;
-    --muted-soft: #8c8478;
+    --muted: #626a73;
+    --muted-soft: #717982;
     /* Lines */
     --line: rgba(28, 31, 36, 0.12);
     --line-strong: rgba(28, 31, 36, 0.22);
@@ -110,7 +109,7 @@ const socialImage = new URL('/social-card.svg', Astro.site ?? Astro.url).toStrin
     /* Accents — copper primary, lavender secondary, restrained mint / rose */
     --accent: #c76a3f;
     --accent-strong: #a44f29;
-    --accent-soft: #f5e3d2;
+    --accent-soft: #ebeef2;
     --secondary: #6e54a8;
     --secondary-strong: #533f86;
     --secondary-soft: #ece5f6;
@@ -148,8 +147,8 @@ const socialImage = new URL('/social-card.svg', Astro.site ?? Astro.url).toStrin
     margin: 0;
     color: var(--text);
     background:
-      radial-gradient(circle at 8% -4%, rgba(199, 106, 63, 0.12), transparent 38rem),
-      radial-gradient(circle at 92% 6%, rgba(110, 84, 168, 0.1), transparent 32rem),
+      radial-gradient(circle at 8% -4%, rgba(110, 84, 168, 0.08), transparent 38rem),
+      radial-gradient(circle at 92% 6%, rgba(79, 143, 107, 0.07), transparent 32rem),
       var(--bg);
     font-family: var(--font-sans);
     font-feature-settings: 'ss01', 'cv11';
@@ -219,7 +218,7 @@ const socialImage = new URL('/social-card.svg', Astro.site ?? Astro.url).toStrin
   .brand {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
+    gap: 0;
     min-width: max-content;
     text-decoration: none;
     color: var(--text-strong);
@@ -227,20 +226,6 @@ const socialImage = new URL('/social-card.svg', Astro.site ?? Astro.url).toStrin
   .brand:hover {
     color: var(--text-strong);
     text-decoration-color: transparent;
-  }
-
-  .brand-mark {
-    display: grid;
-    width: 42px;
-    height: 42px;
-    place-items: center;
-    border-radius: 12px;
-    color: #fff;
-    background: linear-gradient(140deg, var(--accent) 0%, var(--accent-strong) 100%);
-    font-family: var(--font-serif);
-    font-size: 1.3rem;
-    font-weight: 800;
-    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 4px 14px rgba(199, 106, 63, 0.3);
   }
 
   .brand-text strong {

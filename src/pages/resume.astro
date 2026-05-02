@@ -13,10 +13,33 @@ import { profile, resume } from '../data/site';
   <section class="section">
     <div class="section-heading">
       <div>
+        <p class="eyebrow">Education</p>
+        <h2>Academic background</h2>
+      </div>
+    </div>
+    <div class="article-list">
+      {
+        resume.education.map((item) => (
+          <article class="card">
+            <p class="eyebrow">{item.period}</p>
+            <h2>{item.school}</h2>
+            <p>{item.degree}</p>
+            <ul>
+              {item.details.map((detail) => <li>{detail}</li>)}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <div>
         <p class="eyebrow">Experience</p>
         <h2>Work history</h2>
       </div>
-      <p>Use this page as the web version of your CV. Add a PDF link later if you want one.</p>
+      <p>LLM products, reinforcement learning systems, RAG research, and large-scale optimization.</p>
     </div>
     <div class="article-list">
       {
@@ -28,6 +51,24 @@ import { profile, resume } from '../data/site';
             <ul>
               {item.details.map((detail) => <li>{detail}</li>)}
             </ul>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Academic & Projects</p>
+        <h2>Selected papers</h2>
+      </div>
+    </div>
+    <div class="article-list">
+      {
+        resume.publications.map((paper) => (
+          <article class="card">
+            <h3>{paper}</h3>
           </article>
         ))
       }
