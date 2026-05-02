@@ -1,7 +1,7 @@
 ---
 title: "Claude Code and the Shape of an Agent Harness"
 description: "Notes from a Claude Code sharing session: harness design is organization design for agents — and most useful systems still look boring."
-pubDate: 2026-05-03
+pubDate: 2026-04-02
 tags: ["claude-code", "harness", "agents"]
 heroImage: /blog/harness.svg
 heroAlt: "Diagram of an agent harness with planner, workers, verifier, and a handoff file."

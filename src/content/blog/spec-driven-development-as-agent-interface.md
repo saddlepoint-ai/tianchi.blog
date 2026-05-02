@@ -1,7 +1,7 @@
 ---
 title: "Spec-Driven Development as the Agent Interface"
 description: "Vibe coding scales until the diff is too big to read. Past that point, specs — not chat — become the main canvas for working with coding agents."
-pubDate: 2026-05-03
+pubDate: 2026-05-02
 tags: ["spec-driven-development", "agents", "developer-tools"]
 heroImage: /blog/spec-driven.svg
 heroAlt: "Three stacked spec layers — constitution, feature spec, validation."

@@ -1,7 +1,7 @@
 ---
 title: "Context Is the Agent's Real Budget"
 description: "Most agent failures look like attention failures, not intelligence failures. Tokens are the unit, but attention is the constraint."
-pubDate: 2026-05-03
+pubDate: 2026-04-03
 tags: ["context-engineering", "agents", "workflow"]
 heroImage: /blog/context-budget.svg
 heroAlt: "A budget bar split into permanent, task, execution, and noise — the layers of an agent's context window."
