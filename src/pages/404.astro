@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Not Found" description="The page you were looking for does not exist.">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">404</p>
+      <h1 class="page-title">This note is missing.</h1>
+      <p class="lead">
+        The page may have moved, or the idea may not have been written down yet.
+      </p>
+      <div class="tag-list">
+        <a class="tag" href="/">Go home</a>
+        <a class="tag" href="/blog/">Read the blog</a>
+      </div>
+    </div>
+    <aside class="panel">
+      <p class="eyebrow">Useful paths</p>
+      <h2>Try the main notebook routes.</h2>
+      <p>
+        Resume, projects, interests, now, and blog are all available from the top navigation.
+      </p>
+    </aside>
+  </section>
+</BaseLayout>

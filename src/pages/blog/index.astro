@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate } from '../../utils/date';
+
+const posts = (await getCollection('blog'))
+  .filter((post) => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+---
+
+<BaseLayout title="Blog" description="Essays, notes, project logs, and field reports.">
+  <section>
+    <p class="eyebrow">Blog</p>
+    <h1 class="page-title">Markdown into memory.</h1>
+    <p class="lead">
+      Add new writing as Markdown files in <code>src/content/blog</code>. Every push can publish a new
+      static HTML version of the site.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="article-list">
+      {
+        posts.map((post) => (
+          <a class="article-link" href={`/blog/${post.id}/`}>
+            <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+            <span>
+              <h2>{post.data.title}</h2>
+              <p>{post.data.description}</p>
+              <span class="tag-list">
+                {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+              </span>
+            </span>
+          </a>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

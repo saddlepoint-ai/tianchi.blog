@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { nowItems } from '../data/site';
+---
+
+<BaseLayout title="Now" description="A snapshot of what Tianchi is currently focused on.">
+  <section>
+    <p class="eyebrow">Now</p>
+    <h1 class="page-title">Current operating notes.</h1>
+    <p class="lead">
+      A lightweight now page for the active threads, questions, and experiments that are shaping the
+      next few weeks.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="article-list">
+      {
+        nowItems.map((item) => (
+          <article class="card">
+            <h2>{item}</h2>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

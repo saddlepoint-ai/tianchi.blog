@@ -1,0 +1,123 @@
+---
+import { getCollection, render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { formatDate } from '../../utils/date';
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog')).filter((post) => !post.data.draft);
+
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content, headings } = await render(post);
+
+const tocHeadings = headings.filter(
+  (heading) => heading.depth >= 2 && heading.depth <= 3 && heading.slug && heading.text,
+);
+const showToc = tocHeadings.length >= 2;
+---
+
+<BaseLayout
+  title={post.data.title}
+  description={post.data.description}
+  ogType="article"
+  publishedTime={post.data.pubDate.toISOString()}
+>
+  <article class="post">
+    <header class="post-header">
+      <p class="eyebrow">Blog · {formatDate(post.data.pubDate, 'long')}</p>
+      <h1 class="post-title">{post.data.title}</h1>
+      <p class="lead">{post.data.description}</p>
+      <div class="tag-list">
+        {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+      </div>
+    </header>
+
+    <div class:list={['post-layout', showToc ? 'has-toc' : '']}>
+      {
+        showToc && (
+          <aside class="post-toc-aside">
+            <nav class="toc-nav" aria-label="Table of contents">
+              <p class="toc-eyebrow">On this page</p>
+              <ol class="toc-list">
+                {tocHeadings.map((heading) => (
+                  <li class:list={['toc-item', `is-depth-${heading.depth}`]}>
+                    <a href={`#${heading.slug}`} data-toc-link={heading.slug}>
+                      {heading.text}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </aside>
+        )
+      }
+
+      <div class="prose">
+        {
+          showToc && (
+            <details class="toc-mobile">
+              <summary>On this page</summary>
+              <nav aria-label="Table of contents">
+                <ol class="toc-list">
+                  {tocHeadings.map((heading) => (
+                    <li class:list={['toc-item', `is-depth-${heading.depth}`]}>
+                      <a href={`#${heading.slug}`} data-toc-link={heading.slug}>{heading.text}</a>
+                    </li>
+                  ))}
+                </ol>
+              </nav>
+            </details>
+          )
+        }
+        <Content />
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<script>
+  const links = document.querySelectorAll<HTMLAnchorElement>('a[data-toc-link]');
+  if (links.length > 0) {
+    const targets: HTMLElement[] = [];
+    links.forEach((link) => {
+      const slug = link.dataset.tocLink;
+      if (!slug) return;
+      const target = document.getElementById(slug);
+      if (target) targets.push(target);
+    });
+
+    const setActive = (slug: string | null) => {
+      links.forEach((link) => {
+        link.classList.toggle('is-active', link.dataset.tocLink === slug);
+      });
+    };
+
+    let currentSlug: string | null = targets[0]?.id ?? null;
+    setActive(currentSlug);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .map((entry) => entry.target as HTMLElement)
+          .sort((a, b) => a.getBoundingClientRect().top - b.getBoundingClientRect().top);
+
+        if (visible.length > 0) {
+          const next = visible[0].id;
+          if (next !== currentSlug) {
+            currentSlug = next;
+            setActive(currentSlug);
+          }
+        }
+      },
+      { rootMargin: '-96px 0px -65% 0px', threshold: [0, 1] },
+    );
+
+    targets.forEach((el) => observer.observe(el));
+  }
+</script>

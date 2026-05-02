@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://tianchi.blog/sitemap-index.xml

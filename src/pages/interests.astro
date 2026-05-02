@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { interests } from '../data/site';
+---
+
+<BaseLayout title="Interests" description="Topics, hobbies, and recurring curiosities.">
+  <section>
+    <p class="eyebrow">Interests</p>
+    <h1 class="page-title">What keeps pulling attention.</h1>
+    <p class="lead">
+      This page is intentionally broad: technical curiosities, hobbies, themes from books, and the
+      personal questions that keep showing up.
+    </p>
+  </section>
+
+  <section class="section">
+    <div class="grid two">
+      {
+        interests.map((interest, index) => (
+          <article class="card">
+            <p class="eyebrow">Interest {String(index + 1).padStart(2, '0')}</p>
+            <h2>{interest}</h2>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+</BaseLayout>

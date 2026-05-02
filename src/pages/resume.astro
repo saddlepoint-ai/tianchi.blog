@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { profile, resume } from '../data/site';
+---
+
+<BaseLayout title="Resume" description="Resume and professional background for Tianchi.">
+  <section>
+    <p class="eyebrow">Resume</p>
+    <h1 class="page-title">{profile.name}</h1>
+    <p class="lead">{resume.summary}</p>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Experience</p>
+        <h2>Work history</h2>
+      </div>
+      <p>Use this page as the web version of your CV. Add a PDF link later if you want one.</p>
+    </div>
+    <div class="article-list">
+      {
+        resume.experience.map((item) => (
+          <article class="card">
+            <p class="eyebrow">{item.period}</p>
+            <h2>{item.role}</h2>
+            <p>{item.company}</p>
+            <ul>
+              {item.details.map((detail) => <li>{detail}</li>)}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Skills</p>
+        <h2>Working range</h2>
+      </div>
+    </div>
+    <div class="tag-list">
+      {resume.skills.map((skill) => <span class="tag">{skill}</span>)}
+    </div>
+  </section>
+</BaseLayout>
