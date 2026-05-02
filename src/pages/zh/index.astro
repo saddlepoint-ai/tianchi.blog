@@ -4,94 +4,227 @@ import { data } from '../../data/site';
 import { getLangFromUrl, useTranslations } from '../../utils/i18n';
 
 const lang = getLangFromUrl(Astro.url);
-const { profile, timeline, site } = data[lang];
+const { profile, resume } = data[lang];
 const t = useTranslations(lang);
 ---
 
-<BaseLayout title={site.title} description={site.description}>
-  <section class="hero fade-up">
-    <p class="eyebrow">{t('page.home.eyebrow')}</p>
+<BaseLayout
+  title={t('page.resume.eyebrow')}
+  description={`${profile.name} — ${profile.headline}`}
+>
+  <section class="fade-up">
     <h1 class="page-title">{profile.name}.</h1>
-    <p class="lead">
-      {t('page.home.lead')} <code>agent-harnesses</code>, <code>RL</code>, {lang === 'en' ? 'and' : '与'} <code>context-engineering</code>.
-    </p>
-    <div class="tag-list">
-      {profile.focusAreas.map((area) => <span class="tag">{area}</span>)}
-    </div>
+    <p class="lead">{resume.summary}</p>
   </section>
 
   <section class="section fade-up" style="animation-delay: 0.1s">
-    <div class="section-heading">
-      <h2>{t('page.home.experience')}</h2>
-    </div>
-    <div class="track-record">
-      {
-        timeline.map((step) => (
-          <div class="track-item">
-            <div class="track-period">{step.period}</div>
-            <div class="track-content">
-              <h3>{step.label}</h3>
-              <p>{step.sub}</p>
+    <div class="resume-layout">
+      <div class="resume-main">
+        
+        <div class="resume-section">
+          <h2 class="section-title">{t('page.resume.current')}</h2>
+          <div class="resume-item current">
+            <div class="meta">
+              <span class="period">{resume.current.period}</span>
+            </div>
+            <div class="content">
+              <h3>{resume.current.role}</h3>
+              <div class="company">{resume.current.company}</div>
+              <ul>
+                {resume.current.details.map((d) => <li>{d}</li>)}
+              </ul>
             </div>
           </div>
-        ))
-      }
+        </div>
+
+        <div class="resume-section">
+          <h2 class="section-title">{t('page.resume.experience')}</h2>
+          {
+            resume.experience.map((item) => (
+              <div class="resume-item">
+                <div class="meta">
+                  <span class="period">{item.period}</span>
+                </div>
+                <div class="content">
+                  <h3>{item.role}</h3>
+                  <div class="company">{item.company}</div>
+                  <ul>
+                    {item.details.map((detail) => <li>{detail}</li>)}
+                  </ul>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="resume-section">
+          <h2 class="section-title">{t('page.resume.education')}</h2>
+          {
+            resume.education.map((item) => (
+              <div class="resume-item">
+                <div class="meta">
+                  <span class="period">{item.period}</span>
+                </div>
+                <div class="content">
+                  <h3>{item.school}</h3>
+                  <div class="company">{item.degree}</div>
+                  <ul>
+                    {item.details.map((detail) => <li>{detail}</li>)}
+                  </ul>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
+      </div>
+
+      <aside class="resume-sidebar">
+        <div class="sidebar-block">
+          <h3>{t('page.resume.skills')}</h3>
+          <div class="tag-list">
+            {resume.skills.map((skill) => <span class="tag">{skill}</span>)}
+          </div>
+        </div>
+
+        <div class="sidebar-block">
+          <h3>{t('page.resume.papers')}</h3>
+          <ul class="paper-list">
+            {
+              resume.publications.map((p) => (
+                <li>
+                  <div class="paper-title">{p.title}</div>
+                  <div class="paper-venue">{p.venue}</div>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </aside>
     </div>
   </section>
 </BaseLayout>
 
 <style>
-  .hero {
-    padding-top: 40px;
-  }
-
-  .track-record {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .track-item {
+  .resume-layout {
     display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: 24px;
-    padding: 32px 0;
-    border-bottom: 1px solid var(--line);
-    transition: all 0.3s ease;
+    grid-template-columns: minmax(0, 1fr) 280px;
+    gap: 64px;
+    align-items: start;
   }
 
-  .track-item:last-child {
-    border-bottom: none;
+  .resume-section {
+    margin-bottom: 64px;
   }
 
-  .track-item:hover .track-period {
-    color: var(--accent);
-  }
-
-  .track-period {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--muted);
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-
-  .track-content h3 {
+  .section-title {
     font-size: 1.25rem;
-    margin-bottom: 8px;
+    margin-bottom: 32px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 12px;
     color: var(--text-strong);
   }
 
-  .track-content p {
+  .resume-item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 24px;
+    margin-bottom: 40px;
+  }
+
+  .resume-item.current {
+    position: relative;
+  }
+
+  .meta .period {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .content h3 {
+    font-size: 1.15rem;
+    margin-bottom: 4px;
+    color: var(--text-strong);
+  }
+
+  .content .company {
+    color: var(--text-strong);
+    font-size: 0.95rem;
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  .content ul {
     margin: 0;
+    padding-left: 16px;
     color: var(--text);
-    font-size: 1rem;
+  }
+
+  .content li {
+    margin-bottom: 8px;
+    line-height: 1.6;
+  }
+
+  .content li::marker {
+    color: var(--muted);
+  }
+
+  .resume-sidebar {
+    position: sticky;
+    top: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .sidebar-block h3 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 24px;
+    font-family: var(--font-mono);
+  }
+
+  .paper-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .paper-title {
+    color: var(--text-strong);
+    font-size: 0.95rem;
+    line-height: 1.4;
+    margin-bottom: 6px;
+    font-weight: 500;
+  }
+
+  .paper-venue {
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+
+  @media (max-width: 960px) {
+    .resume-layout {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    
+    .resume-sidebar {
+      position: static;
+    }
   }
 
   @media (max-width: 600px) {
-    .track-item {
+    .resume-item {
       grid-template-columns: 1fr;
-      gap: 12px;
-      padding: 24px 0;
+      gap: 8px;
     }
   }
 </style>

@@ -56,35 +56,20 @@ const posts = (await getCollection('blog'))
     padding: 32px;
     position: relative;
     overflow: hidden;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .blog-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(168, 85, 247, 0.3), transparent);
-    opacity: 0;
-    transition: opacity 0.4s;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   }
 
   .blog-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(168, 85, 247, 0.3);
-    background: var(--panel-tinted);
-    box-shadow: 0 20px 40px -20px rgba(0,0,0,0.8), 0 0 20px rgba(168, 85, 247, 0.05);
-  }
-
-  .blog-card:hover::before {
-    opacity: 1;
+    transform: translateY(-2px);
+    border-color: var(--line-strong);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
   }
 
   .blog-card time {
     display: block;
     font-family: var(--font-mono);
     font-size: 0.8rem;
-    color: var(--secondary);
+    color: var(--muted);
     margin-bottom: 16px;
   }
 
@@ -96,7 +81,7 @@ const posts = (await getCollection('blog'))
   }
 
   .blog-card:hover h2 {
-    color: #fff;
+    color: var(--accent-strong);
   }
 
   .blog-card p {

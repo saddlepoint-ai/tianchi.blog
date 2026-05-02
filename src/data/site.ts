@@ -15,8 +15,7 @@ export const data = {
       author: 'Tianchi Cai',
     },
     navItems: [
-      { href: '/', label: 'Home' },
-      { href: '/resume/', label: 'Resume' },
+      { href: '/', label: 'Resume' },
       { href: '/blog/', label: 'Blog' },
     ],
     profile: {
@@ -24,26 +23,7 @@ export const data = {
       role: 'Founder & CEO',
       headline: 'LLMs · Reinforcement Learning · RAG · Agent Harnesses',
       location: 'Beijing / Hangzhou',
-      focusAreas: [
-        'LLMs',
-        'Reinforcement learning',
-        'RAG / retrieval',
-        'Agent harnesses',
-        'Spec-driven development',
-      ],
-      highlights: [
-        { label: 'Ant Group', detail: 'Led RL & RAG team — 10+ papers, billions in marketing savings.' },
-        { label: 'Minimax', detail: 'Aligned Xingye & Talkie chat models to human preference.' },
-        { label: 'HKU', detail: 'Philosophy → Math & CS. ACM-ICPC Asian Gold medalist.' },
-      ],
     },
-    timeline: [
-      { period: '2013 – 2018', label: 'HKU', sub: 'Math & CS' },
-      { period: '2017', label: 'Google', sub: 'SWE intern, Ads' },
-      { period: '2018 – 2024', label: 'Ant Group', sub: 'Lead RL & RAG' },
-      { period: '2024 – 2025', label: 'Minimax', sub: 'Xingye & Talkie' },
-      { period: '2025 – Present', label: 'Founder & CEO', sub: 'Building' },
-    ],
     resume: {
       summary: 'Founder and CEO. Previously led the Reinforcement Learning & RAG team at Ant Group and worked on chat models at Minimax. Hands-on across LLM training, RLHF, retrieval, and large-scale optimization — with 10+ peer-reviewed papers and a Best Paper runner-up.',
       current: {
@@ -106,9 +86,6 @@ export const data = {
       skills: ['LLMs', 'RLHF', 'RAG', 'Reinforcement learning', 'Marketing optimization', 'Agent workflows', 'Spec-driven development'],
     },
     ui: {
-      'page.home.eyebrow': 'Founder & CEO',
-      'page.home.lead': 'Founder & CEO. Formerly led RL & RAG at Ant Group and trained models at Minimax. Writing about',
-      'page.home.experience': 'Experience.',
       'page.resume.eyebrow': 'Resume',
       'page.resume.current': 'Current',
       'page.resume.experience': 'Experience',
@@ -119,7 +96,7 @@ export const data = {
       'page.blog.title': 'Signals.',
       'page.blog.lead': 'Field notes on agent harnesses, context engineering, and spec-driven development.',
       'page.post.contents': 'Contents',
-      'footer.copyright': 'All systems nominal.',
+      'footer.copyright': 'All rights reserved.',
     }
   },
   zh: {
@@ -129,8 +106,7 @@ export const data = {
       author: '蔡天池',
     },
     navItems: [
-      { href: '/zh/', label: '首页' },
-      { href: '/zh/resume/', label: '简历' },
+      { href: '/zh/', label: '简历' },
       { href: '/zh/blog/', label: '博客' },
     ],
     profile: {
@@ -138,26 +114,7 @@ export const data = {
       role: '创始人 & CEO',
       headline: '大模型 · 强化学习 · 检索增强 · 智能体引擎',
       location: '北京 / 杭州',
-      focusAreas: [
-        '大模型 (LLMs)',
-        '强化学习 (RL)',
-        '检索增强 (RAG)',
-        '智能体引擎',
-        '基于规范开发 (Spec-driven)',
-      ],
-      highlights: [
-        { label: '蚂蚁集团', detail: '带领强化学习与 RAG 团队，发表十余篇顶会论文，节省数十亿营销预算。' },
-        { label: 'Minimax', detail: '负责星野与 Talkie 聊天大模型的人类偏好对齐。' },
-        { label: '香港大学', detail: '哲学转数学与计算机双修，ACM-ICPC 亚洲区金牌。' },
-      ],
     },
-    timeline: [
-      { period: '2013 – 2018', label: '香港大学', sub: '数学与计算机' },
-      { period: '2017', label: 'Google', sub: '软件工程实习生, Ads' },
-      { period: '2018 – 2024', label: '蚂蚁集团', sub: '强化学习与RAG负责人' },
-      { period: '2024 – 2025', label: 'Minimax', sub: '星野与Talkie对齐' },
-      { period: '2025 – 至今', label: '创始人 & CEO', sub: 'Building' },
-    ],
     resume: {
       summary: '创始人与 CEO。曾于蚂蚁集团带领强化学习与 RAG 团队，并于 Minimax 负责聊天模型对齐。在大模型训练、RLHF、检索增强以及大规模优化等领域拥有丰富的实战经验，发表十余篇同行评审论文，曾获最佳论文亚军。',
       current: {
@@ -220,9 +177,6 @@ export const data = {
       skills: ['大模型 (LLMs)', 'RLHF', 'RAG', '强化学习', '营销优化', '智能体工作流', '基于规范开发'],
     },
     ui: {
-      'page.home.eyebrow': '创始人 & CEO',
-      'page.home.lead': '创始人兼 CEO。曾任蚂蚁集团强化学习与RAG团队负责人，并在Minimax训练模型。近期主要在写关于',
-      'page.home.experience': '工作经历',
       'page.resume.eyebrow': '简历',
       'page.resume.current': '当前',
       'page.resume.experience': '工作经历',
@@ -233,7 +187,7 @@ export const data = {
       'page.blog.title': '信号',
       'page.blog.lead': '关于智能体引擎、上下文工程与基于规范开发的实地笔记。',
       'page.post.contents': '目录',
-      'footer.copyright': '所有系统运行正常。',
+      'footer.copyright': '保留所有权利。',
     }
   }
 };
