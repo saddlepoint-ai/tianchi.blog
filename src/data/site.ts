@@ -28,11 +28,11 @@ export const data = {
       summary: 'Founder and CEO. Previously led the Reinforcement Learning & RAG team at Ant Group and worked on chat models at Minimax. Hands-on across LLM training, RLHF, retrieval, and large-scale optimization — with 10+ peer-reviewed papers and a Best Paper runner-up.',
       current: {
         role: 'Founder & CEO',
-        company: 'Stealth',
+        company: 'Saddlepoint AI',
         period: '2025 – Present',
         details: [
-          'Building AI-native products around LLMs, agents, and human-in-the-loop execution.',
-          'Working in public on agent harness design, context engineering, and spec-driven development.',
+          'Saddlepoint implies seeking new dimensions: when hitting a local max, find a new min to optimize. This orthogonal dimension-shifting is our core way to innovate and avoid involution.',
+          'Built nodie.ai for agent workflows, and our crayfish product "nodie claw".',
         ],
       },
       experience: [
@@ -119,11 +119,11 @@ export const data = {
       summary: '创始人与 CEO。曾于蚂蚁集团带领强化学习与 RAG 团队，并于 Minimax 负责聊天模型对齐。在大模型训练、RLHF、检索增强以及大规模优化等领域拥有丰富的实战经验，发表十余篇同行评审论文，曾获最佳论文亚军。',
       current: {
         role: '创始人 & CEO',
-        company: 'Stealth',
+        company: 'Saddlepoint AI',
         period: '2025 – 至今',
         details: [
-          '围绕大语言模型、智能体和 Human-in-the-loop 构建 AI 原生产品。',
-          '在开源社区分享智能体引擎设计、上下文工程以及基于规范的开发模式。',
+          'Saddlepoint 曲意在一个方向走到 max 时，寻找新的 min 维度。不断寻找新的维度是创新和反内卷的核心方式。',
+          '打造了智能体工作流产品 nodie.ai，以及小龙虾产品 nodie claw。',
         ],
       },
       experience: [
