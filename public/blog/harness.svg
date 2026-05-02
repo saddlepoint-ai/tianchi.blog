@@ -1,0 +1,75 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="A harness diagram with planner, workers, and verifier nodes">
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1C1F24" stroke-opacity="0.05" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EEF1F4"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+
+  <!-- ambient washes -->
+  <circle cx="1080" cy="100" r="240" fill="#6E54A8" opacity="0.07"/>
+  <circle cx="120" cy="540" r="240" fill="#4F8F6B" opacity="0.06"/>
+
+  <!-- frame -->
+  <rect x="60" y="60" width="1080" height="510" rx="32" stroke="#1C1F24" stroke-opacity="0.14" stroke-width="2" fill="none"/>
+
+  <!-- eyebrow -->
+  <line x1="100" y1="130" x2="160" y2="130" stroke="#C76A3F" stroke-width="3"/>
+  <text x="100" y="166" fill="#A44F29" font-family="Inter, system-ui, sans-serif" font-size="20" font-weight="700" letter-spacing="3">HARNESS</text>
+
+  <!-- title -->
+  <text x="100" y="244" fill="#0F1218" font-family="Inter, system-ui, sans-serif" font-size="60" font-weight="800" letter-spacing="-2.4">The shape of an</text>
+  <text x="100" y="316" fill="#0F1218" font-family="Inter, system-ui, sans-serif" font-size="60" font-weight="800" letter-spacing="-2.4">agent harness.</text>
+
+  <text x="100" y="370" fill="#626A73" font-family="Inter, system-ui, sans-serif" font-size="22" font-weight="500">Planner → workers → verifier. Files, not chat.</text>
+
+  <!-- diagram -->
+  <g transform="translate(100, 420)">
+    <!-- planner -->
+    <rect x="0" y="0" width="180" height="86" rx="16" fill="#FFFFFF" stroke="#1C1F24" stroke-opacity="0.18" stroke-width="1.5"/>
+    <text x="90" y="40" text-anchor="middle" fill="#A44F29" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" letter-spacing="2">PLANNER</text>
+    <text x="90" y="64" text-anchor="middle" fill="#1C1F24" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600">Owns scope</text>
+
+    <!-- arrows -->
+    <path d="M180 43 L 280 43" stroke="#1C1F24" stroke-opacity="0.35" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+
+    <!-- workers stack -->
+    <g transform="translate(280, 0)">
+      <rect x="0" y="0" width="220" height="40" rx="10" fill="#ECE5F6" stroke="#6E54A8" stroke-opacity="0.4" stroke-width="1.2"/>
+      <text x="14" y="26" fill="#533F86" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">worker · editor</text>
+
+      <rect x="0" y="46" width="220" height="40" rx="10" fill="#ECE5F6" stroke="#6E54A8" stroke-opacity="0.4" stroke-width="1.2"/>
+      <text x="14" y="72" fill="#533F86" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">worker · tests</text>
+    </g>
+
+    <path d="M500 43 L 600 43" stroke="#1C1F24" stroke-opacity="0.35" stroke-width="1.5" fill="none" marker-end="url(#arr)"/>
+
+    <!-- verifier -->
+    <rect x="600" y="0" width="200" height="86" rx="16" fill="#DCEADF" stroke="#4F8F6B" stroke-opacity="0.5" stroke-width="1.5"/>
+    <text x="700" y="40" text-anchor="middle" fill="#2E5A45" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="700" letter-spacing="2">VERIFIER</text>
+    <text x="700" y="64" text-anchor="middle" fill="#1C1F24" font-family="Inter, system-ui, sans-serif" font-size="16" font-weight="600">Tests · screenshots</text>
+
+    <!-- handoff -->
+    <g transform="translate(840, 8)">
+      <rect x="0" y="0" width="160" height="70" rx="12" fill="#FFFFFF" stroke="#1C1F24" stroke-opacity="0.18" stroke-width="1.5" stroke-dasharray="4 4"/>
+      <text x="80" y="30" text-anchor="middle" fill="#626A73" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="700" letter-spacing="2">HANDOFF</text>
+      <text x="80" y="54" text-anchor="middle" fill="#1C1F24" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600">progress.md</text>
+    </g>
+  </g>
+
+  <!-- arrow marker -->
+  <defs>
+    <marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#1C1F24" fill-opacity="0.4"/>
+    </marker>
+  </defs>
+
+  <!-- footer -->
+  <text x="100" y="540" fill="#626A73" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" letter-spacing="3">TIANCHI.BLOG · NOTEBOOK</text>
+</svg>

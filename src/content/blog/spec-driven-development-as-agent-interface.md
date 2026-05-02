@@ -1,9 +1,13 @@
 ---
 title: "Spec-Driven Development as the Agent Interface"
-description: "A note on why specs may become the main canvas for working with coding agents, and why the current tools still feel early."
+description: "Vibe coding scales until the diff is too big to read. Past that point, specs — not chat — become the main canvas for working with coding agents."
 pubDate: 2026-05-03
 tags: ["spec-driven-development", "agents", "developer-tools"]
+heroImage: /blog/spec-driven.svg
+heroAlt: "Three stacked spec layers — constitution, feature spec, validation."
 ---
+
+> **TL;DR.** Agent is muscle. Spec is brain. As codebases grow, the human moves from line-by-line reviewer to spec author — but the editing surface for that role is still primitive. The next good developer tool will probably make specs feel as natural as editing a document.
 
 Vibe coding is fun until the codebase becomes too large to review.
 
@@ -108,3 +112,11 @@ The best agent workflows will not be pure chat. Chat is good for exploration, bu
 Specs, tests, progress files, and structured handoffs are better anchors. They give agents something stable to act on and humans something compact to review.
 
 The next good developer tool may be the one that makes those artifacts feel as natural as editing a document.
+
+## Further reading
+
+- [Spec-driven development with AI: get started with a new open-source toolkit — GitHub blog](https://github.blog/ai-and-ml/generative-ai/spec-driven-development-with-ai-get-started-with-a-new-open-source-toolkit/)
+- [GitHub Spec Kit — repo](https://github.com/github/spec-kit)
+- [Exploring Gen AI: SDD with three tools — Martin Fowler](https://martinfowler.com/articles/exploring-gen-ai/sdd-3-tools.html)
+- [Spec-driven development is not waterfall — Marc Brooker](https://brooker.co.za/blog/2026/04/09/waterfall-vs-spec.html)
+- [OpenSpec — the spec framework for coding agents](https://openspec.dev/)

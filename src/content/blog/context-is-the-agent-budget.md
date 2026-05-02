@@ -1,9 +1,13 @@
 ---
 title: "Context Is the Agent's Real Budget"
-description: "Why I think context engineering is less about stuffing more into the window and more about choosing the smallest high-signal state."
+description: "Most agent failures look like attention failures, not intelligence failures. Tokens are the unit, but attention is the constraint."
 pubDate: 2026-05-03
 tags: ["context-engineering", "agents", "workflow"]
+heroImage: /blog/context-budget.svg
+heroAlt: "A budget bar split into permanent, task, execution, and noise — the layers of an agent's context window."
 ---
+
+> **TL;DR.** Context engineering is less about stuffing more into the window and more about choosing the smallest high-signal state that still makes the desired outcome likely. Treat permanent, task, and execution context as separate layers — and let scripts and files carry weight that chat cannot.
 
 Most agent failures do not look like intelligence failures at first. They look like attention failures.
 
@@ -90,3 +94,11 @@ I try to keep three layers separate:
 Permanent context should be small and stable. Task context should be explicit and reviewable. Execution context should be disposable.
 
 When those layers blur, agents start carrying the wrong state forward.
+
+## Further reading
+
+- [Effective context engineering for AI agents — Anthropic engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
+- [Advanced tool use — Anthropic engineering](https://www.anthropic.com/engineering/advanced-tool-use)
+- [Code execution with MCP — Anthropic engineering](https://www.anthropic.com/engineering/code-execution-with-mcp)
+- [The anatomy of an agent harness — LangChain blog](https://blog.langchain.com/the-anatomy-of-an-agent-harness/)
+- [Self-driving codebases — Cursor](https://cursor.com/blog/self-driving-codebases)

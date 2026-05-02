@@ -1,9 +1,13 @@
 ---
 title: "Claude Code and the Shape of an Agent Harness"
-description: "A cleaned-up version of my notes from a Claude Code sharing session: why harness design feels like organization design for agents."
+description: "Notes from a Claude Code sharing session: harness design is organization design for agents — and most useful systems still look boring."
 pubDate: 2026-05-03
 tags: ["claude-code", "harness", "agents"]
+heroImage: /blog/harness.svg
+heroAlt: "Diagram of an agent harness with planner, workers, verifier, and a handoff file."
 ---
+
+> **TL;DR.** Claude Code is not just "a better coding model." It is a model running inside a *harness* — files, shell, memory, tools, permissions, git, tests, browsers, and a human. Once you start treating the harness as the product, most of the interesting design questions become organizational, not algorithmic.
 
 The most useful way I have found to think about Claude Code is not "a better coding model." It is a model running inside a harness: filesystem, shell, memory files, tools, permissions, git, tests, browser automation, and the human who decides what good enough means.
 
@@ -74,3 +78,12 @@ Do the simplest thing that makes the agent's work verifiable.
 Sometimes that is a test suite. Sometimes it is a browser screenshot. Sometimes it is a checklist. Sometimes it is a separate reviewer. The harness should grow only where the current model repeatedly fails.
 
 The mistake is to build a three-month framework for a model that will change next week.
+
+## Further reading
+
+- [The anatomy of an agent harness — LangChain blog](https://blog.langchain.com/the-anatomy-of-an-agent-harness/)
+- [Effective harnesses for long-running agents — Anthropic engineering](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
+- [Effective context engineering for AI agents — Anthropic engineering](https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents)
+- [Agent best practices — Cursor](https://cursor.com/blog/agent-best-practices)
+- [Scaling agents — Cursor](https://cursor.com/blog/scaling-agents)
+- [Anthropic skills repo](https://github.com/anthropics/skills)

@@ -37,6 +37,18 @@ const showToc = tocHeadings.length >= 2;
       </div>
     </header>
 
+    {
+      post.data.heroImage && (
+        <figure class="post-hero">
+          <img
+            src={post.data.heroImage}
+            alt={post.data.heroAlt ?? post.data.title}
+            loading="eager"
+          />
+        </figure>
+      )
+    }
+
     <div class:list={['post-layout', showToc ? 'has-toc' : '']}>
       {
         showToc && (
@@ -121,3 +133,20 @@ const showToc = tocHeadings.length >= 2;
     targets.forEach((el) => observer.observe(el));
   }
 </script>
+
+<style>
+  .post-hero {
+    margin: 28px 0 0;
+    padding: 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius-md);
+    background: var(--panel);
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+  }
+  .post-hero img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+</style>
