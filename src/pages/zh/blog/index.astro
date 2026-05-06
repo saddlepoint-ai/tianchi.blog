@@ -8,96 +8,61 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const posts = (await getCollection('blog'))
-  .filter((post) => !post.data.draft)
+  .filter((post) => !post.data.draft && post.data.lang === lang)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
 <BaseLayout title={t('page.blog.eyebrow')} description={t('page.blog.lead')}>
-  <section class="fade-up">
+  <section class="fade-up doc-head">
     <p class="eyebrow">{t('page.blog.eyebrow')}</p>
     <h1 class="page-title">{t('page.blog.title')}</h1>
-    <p class="lead">
-      {t('page.blog.lead')}
-    </p>
+    <p class="lead">{t('page.blog.lead')}</p>
+    <div class="meta-row">
+      <span><b>文章数：</b>{posts.length}</span>
+      {posts[0] && <span><b>最近更新：</b>{formatDate(posts[0].data.updatedDate ?? posts[0].data.pubDate, 'long')}</span>}
+    </div>
   </section>
 
-  <section class="section fade-up" style="animation-delay: 0.1s">
-    <div class="blog-grid">
-      {
-        posts.map((post) => (
-          <a class="blog-card" href={`${lang === 'zh' ? '/zh' : ''}/blog/${post.id}/`}>
-            <div class="blog-card-inner">
+  <section class="fade-up" style="margin-top: 56px; animation-delay: 0.08s">
+    <ol class="post-list">
+      {posts.map((post) => (
+        <li class="post-row">
+          <a class="post-link" href={`${lang === 'zh' ? '/zh' : ''}/blog/${post.id}/`}>
+            <div class="post-row-head">
               <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
-              <h2>{post.data.title}</h2>
-              <p>{post.data.description}</p>
-              <div class="tag-list">
-                {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
-              </div>
+              <span class="post-arrow" aria-hidden="true">→</span>
             </div>
+            <h2 class="post-title">{post.data.title}</h2>
+            <p class="post-desc">{post.data.description}</p>
+            {post.data.tags.length > 0 && (
+              <div class="tag-list">
+                {post.data.tags.slice(0, 5).map((tag) => <span class="tag">{tag}</span>)}
+              </div>
+            )}
           </a>
-        ))
-      }
-    </div>
+        </li>
+      ))}
+    </ol>
+    {posts.length === 0 && (
+      <p class="empty-state">暂无文章。</p>
+    )}
   </section>
 </BaseLayout>
 
 <style>
-  .blog-grid {
-    display: grid;
-    gap: 24px;
-  }
-
-  .blog-card {
-    display: block;
-    text-decoration: none;
-    background: var(--panel);
-    border: 1px solid var(--line);
-    border-radius: var(--radius-lg);
-    padding: 32px;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  }
-
-  .blog-card:hover {
-    transform: translateY(-2px);
-    border-color: var(--line-strong);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
-  }
-
-  .blog-card time {
-    display: block;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--muted);
-    margin-bottom: 16px;
-  }
-
-  .blog-card h2 {
-    font-size: 1.6rem;
-    margin-bottom: 12px;
-    color: var(--text-strong);
-    transition: color 0.2s;
-  }
-
-  .blog-card:hover h2 {
-    color: var(--accent-strong);
-  }
-
-  .blog-card p {
-    color: var(--text);
-    font-size: 1.05rem;
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  @media (max-width: 600px) {
-    .blog-card {
-      padding: 24px;
-    }
-    
-    .blog-card h2 {
-      font-size: 1.3rem;
-    }
-  }
+  .post-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0; }
+  .post-row { border-top: 1px solid var(--line); }
+  .post-row:last-child { border-bottom: 1px solid var(--line); }
+  .post-link { display: block; padding: 28px 4px; text-decoration: none; border-bottom: none; color: inherit; transition: background 0.2s ease, padding 0.2s ease; }
+  .post-link:hover { background: var(--bg-2); padding-left: 18px; padding-right: 18px; color: inherit; }
+  .post-row-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+  .post-row-head time { font-family: var(--font-mono); font-size: 11px; color: var(--text-dim); letter-spacing: 0.06em; text-transform: uppercase; }
+  .post-arrow { font-family: var(--font-mono); color: var(--text-dim); font-size: 1rem; transition: transform 0.2s ease, color 0.2s ease; }
+  .post-link:hover .post-arrow { color: var(--accent); transform: translateX(4px); }
+  .post-title { font-size: 1.45rem; color: var(--text-strong); line-height: 1.25; margin: 0 0 8px; letter-spacing: -0.02em; transition: color 0.2s ease; }
+  .post-link:hover .post-title { color: var(--accent-strong); }
+  .post-desc { color: var(--text-mid); font-size: 0.95rem; line-height: 1.6; margin: 0; max-width: 720px; }
+  .tag-list { margin-top: 14px; }
+  .empty-state { color: var(--text-dim); font-style: italic; }
+  @media (max-width: 600px) { .post-link { padding: 22px 4px; } .post-title { font-size: 1.2rem; } }
 </style>

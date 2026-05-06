@@ -5,7 +5,8 @@ import { formatDate } from '../../../utils/date';
 import { getLangFromUrl, useTranslations } from '../../../utils/i18n';
 
 export async function getStaticPaths() {
-  const posts = (await getCollection('blog')).filter((post) => !post.data.draft);
+  const posts = (await getCollection('blog'))
+    .filter((post) => !post.data.draft && post.data.lang === 'zh');
 
   return posts.map((post) => ({
     params: { id: post.id },
@@ -15,6 +16,19 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content, headings } = await render(post);
+
+const blogPostingJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BlogPosting',
+  headline: post.data.title,
+  description: post.data.description,
+  datePublished: post.data.pubDate.toISOString(),
+  dateModified: (post.data.updatedDate ?? post.data.pubDate).toISOString(),
+  inLanguage: post.data.lang === 'zh' ? 'zh-CN' : 'en-US',
+  url: Astro.url.href,
+  keywords: post.data.tags,
+  mainEntityOfPage: { '@type': 'WebPage', '@id': Astro.url.href },
+};
 
 const tocHeadings = headings.filter(
   (heading) => heading.depth >= 2 && heading.depth <= 3 && heading.slug && heading.text,
@@ -32,36 +46,40 @@ const t = useTranslations(lang);
   publishedTime={post.data.pubDate.toISOString()}
 >
   <article class="post fade-up">
-    <header class="post-header">
-      <div class="post-meta">
-        <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate, 'long')}</time>
-      </div>
+    <script type="application/ld+json" set:html={JSON.stringify(blogPostingJsonLd)} />
+    <header class="post-header doc-head">
+      <p class="eyebrow">备忘 · {formatDate(post.data.pubDate, 'long')}</p>
       <h1 class="post-title">{post.data.title}</h1>
       <p class="lead">{post.data.description}</p>
-      <div class="tag-list">
-        {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+      <div class="meta-row">
+        <span><b>发布：</b><time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate, 'long')}</time></span>
+        {post.data.updatedDate && (
+          <span><b>更新：</b><time datetime={post.data.updatedDate.toISOString()}>{formatDate(post.data.updatedDate, 'long')}</time></span>
+        )}
+        {post.data.sourcePath && <span><b>来源：</b><code>{post.data.sourcePath}</code></span>}
       </div>
+      {post.data.tags.length > 0 && (
+        <div class="tag-list" style="margin-top: 18px;">
+          {post.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+        </div>
+      )}
     </header>
 
     <div class:list={['post-layout', showToc ? 'has-toc' : '']}>
-      {
-        showToc && (
-          <aside class="post-toc-aside">
-            <nav class="toc-nav" aria-label="Table of contents">
-              <p class="toc-eyebrow">{t('page.post.contents')}</p>
-              <ol class="toc-list">
-                {tocHeadings.map((heading) => (
-                  <li class:list={['toc-item', `is-depth-${heading.depth}`]}>
-                    <a href={`#${heading.slug}`} data-toc-link={heading.slug}>
-                      {heading.text}
-                    </a>
-                  </li>
-                ))}
-              </ol>
-            </nav>
-          </aside>
-        )
-      }
+      {showToc && (
+        <aside class="post-toc-aside">
+          <nav class="toc-nav" aria-label="目录">
+            <p class="toc-eyebrow">{t('page.post.contents')}</p>
+            <ol class="toc-list">
+              {tocHeadings.map((heading) => (
+                <li class:list={['toc-item', `is-depth-${heading.depth}`]}>
+                  <a href={`#${heading.slug}`} data-toc-link={heading.slug}>{heading.text}</a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+        </aside>
+      )}
 
       <div class="prose">
         <Content />
@@ -111,189 +129,3 @@ const t = useTranslations(lang);
     targets.forEach((el) => observer.observe(el));
   }
 </script>
-
-<style is:global>
-  .post-header {
-    margin-bottom: 64px;
-    max-width: 800px;
-  }
-
-  .post-meta {
-    font-family: var(--font-mono);
-    color: var(--muted);
-    font-size: 0.9rem;
-    margin-bottom: 24px;
-    letter-spacing: 0.05em;
-  }
-
-  .post-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    line-height: 1.1;
-    margin-bottom: 24px;
-    letter-spacing: -0.03em;
-    color: var(--text-strong);
-  }
-
-  .post-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 64px;
-    align-items: start;
-  }
-
-  @media (min-width: 1024px) {
-    .post-layout.has-toc {
-      grid-template-columns: 240px minmax(0, 1fr);
-    }
-  }
-
-  /* TOC Styles */
-  .post-toc-aside {
-    display: none;
-  }
-
-  @media (min-width: 1024px) {
-    .post-toc-aside {
-      display: block;
-      position: sticky;
-      top: 120px;
-    }
-  }
-
-  .toc-eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--muted);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 16px;
-  }
-
-  .toc-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    border-left: 1px solid var(--line);
-  }
-
-  .toc-item a {
-    display: block;
-    padding: 4px 0 4px 16px;
-    color: var(--muted);
-    font-size: 0.85rem;
-    text-decoration: none;
-    transition: all 0.2s;
-    border-left: 1px solid transparent;
-    margin-left: -1px;
-  }
-
-  .toc-item.is-depth-3 a {
-    padding-left: 24px;
-    font-size: 0.8rem;
-  }
-
-  .toc-item a:hover {
-    color: var(--text-strong);
-  }
-
-  .toc-item a.is-active {
-    color: var(--accent-strong);
-    border-left-color: var(--accent-strong);
-    font-weight: 500;
-  }
-
-  /* Prose Styles */
-  .prose {
-    max-width: 720px;
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: var(--text);
-  }
-
-  .prose > * + * {
-    margin-top: 1.5em;
-  }
-
-  .prose h2, .prose h3, .prose h4 {
-    color: var(--text-strong);
-    margin-top: 2em;
-    margin-bottom: 1em;
-    scroll-margin-top: 120px;
-  }
-
-  .prose h2 { font-size: 1.8rem; border-bottom: 1px solid var(--line); padding-bottom: 0.5em; }
-  .prose h3 { font-size: 1.4rem; }
-
-  .prose p { margin-top: 0; margin-bottom: 1.5em; }
-
-  .prose ul, .prose ol {
-    padding-left: 1.5em;
-    margin-bottom: 1.5em;
-  }
-
-  .prose li { margin-bottom: 0.5em; }
-  .prose li::marker { color: var(--muted); }
-
-  .prose a {
-    color: var(--accent-strong);
-    text-decoration-color: var(--line-strong);
-  }
-  .prose a:hover {
-    text-decoration-color: var(--accent-strong);
-  }
-
-  .prose blockquote {
-    margin: 2em 0;
-    padding: 1.5em 2em;
-    border-left: 2px solid var(--accent-strong);
-    background: var(--panel-tinted);
-    color: var(--text-strong);
-    font-style: italic;
-    border-radius: 0 8px 8px 0;
-  }
-
-  .prose code {
-    font-family: var(--font-mono);
-    font-size: 0.85em;
-    background: var(--panel-tinted);
-    padding: 0.2em 0.4em;
-    border-radius: 4px;
-    color: var(--text-strong);
-    border: 1px solid var(--line);
-  }
-
-  .prose pre {
-    background: #09090B;
-    border: 1px solid var(--line);
-    padding: 1.5em;
-    border-radius: var(--radius-md);
-    overflow-x: auto;
-    margin: 2em 0;
-  }
-
-  .prose pre code {
-    background: transparent;
-    padding: 0;
-    border: none;
-    color: #F4F4F5;
-    font-size: 0.9em;
-    line-height: 1.6;
-  }
-
-  .prose hr {
-    border: none;
-    border-top: 1px dashed var(--line-strong);
-    margin: 3em 0;
-  }
-
-  .prose img {
-    max-width: 100%;
-    height: auto;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--line);
-    margin: 2em 0;
-  }
-</style>
