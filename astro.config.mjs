@@ -24,18 +24,24 @@ export default defineConfig({
       // Skip 404; everything else gets indexed.
       filter: (page) => !page.includes('/404'),
       // Per-page priorities so the resume + blog listing rank above individual posts.
+      // The cast is needed because `changefreq` expects the `EnumChangefreq` type
+      // from the underlying `sitemap` package, not the raw literal — `as const`
+      // doesn't narrow to that enum under @ts-check.
       serialize(item) {
         const url = item.url.replace(SITE, '').replace(/\/$/, '') || '/';
-        if (url === '/' || url === '/zh') {
-          return { ...item, changefreq: 'monthly', priority: 1.0 };
-        }
-        if (url === '/blog' || url === '/zh/blog') {
-          return { ...item, changefreq: 'weekly', priority: 0.9 };
-        }
-        if (url.startsWith('/blog/') || url.startsWith('/zh/blog/')) {
-          return { ...item, changefreq: 'monthly', priority: 0.8 };
-        }
-        return { ...item, changefreq: 'monthly', priority: 0.5 };
+        /**
+         * @param {number} priority
+         * @param {string} changefreq
+         * @returns {import('@astrojs/sitemap').SitemapItem}
+         */
+        const tag = (priority, changefreq) =>
+          /** @type {import('@astrojs/sitemap').SitemapItem} */ (
+            { ...item, changefreq, priority }
+          );
+        if (url === '/' || url === '/zh') return tag(1.0, 'monthly');
+        if (url === '/blog' || url === '/zh/blog') return tag(0.9, 'weekly');
+        if (url.startsWith('/blog/') || url.startsWith('/zh/blog/')) return tag(0.8, 'monthly');
+        return tag(0.5, 'monthly');
       },
     }),
   ],
