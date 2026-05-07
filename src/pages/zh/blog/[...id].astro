@@ -9,7 +9,8 @@ export async function getStaticPaths() {
     .filter((post) => !post.data.draft && post.data.lang === 'zh');
 
   return posts.map((post) => ({
-    params: { id: post.id },
+    // Strip the `zh/` directory prefix so /zh/blog/<slug>/ pairs with /blog/<slug>/.
+    params: { id: post.id.replace(/^zh\//, '') },
     props: { post },
   }));
 }

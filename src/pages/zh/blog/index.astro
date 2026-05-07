@@ -27,7 +27,7 @@ const posts = (await getCollection('blog'))
     <ol class="post-list">
       {posts.map((post) => (
         <li class="post-row">
-          <a class="post-link" href={`${lang === 'zh' ? '/zh' : ''}/blog/${post.id}/`}>
+          <a class="post-link" href={`/zh/blog/${post.id.replace(/^zh\//, '')}/`}>
             <div class="post-row-head">
               <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
               <span class="post-arrow" aria-hidden="true">→</span>
