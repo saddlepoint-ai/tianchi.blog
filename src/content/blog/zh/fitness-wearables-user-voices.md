@@ -14,20 +14,22 @@ sourcePath: "claude-workspace/public/wiki/research/2026-05-13-fitness-wearable-u
 
 ## 先读哪个
 
-**直接读 [synthesis-takeaways.md](synthesis-takeaways.md)**。它不是流水账，是把 5 篇内容合成对朋友 6 个质疑的逐条回答 + 4 个软件 gap 的 actionable 结论 + 对 nodie-fit 的产品启示。
+**直接读 [synthesis-takeaways.md](/zh/blog/fitness-wearables-user-voices/synthesis/)**。它不是流水账，是把 5 篇内容合成对朋友 6 个质疑的逐条回答 + 4 个软件 gap 的 actionable 结论 + 对 nodie-fit 的产品启示。
 
-如果只看一段：[合成结论 + nodie-fit 启示](/zh/blog/fitness-wearables-user-voices/synthesis/) 的 TL;DR——"朋友的质疑大体正确，但有一处关键错位"。WHOOP/Oura 用户付的是一个早晨数字 + 一个身份，不是 AI；但无屏正是 AI 长期赢 wearable 的必需形态。软件差异化空间真实存在但很窄——具体是 4 个 gap，所有现有 app 都没做。
+如果只看一段：[合成结论](/zh/blog/fitness-wearables-user-voices/synthesis/) 的 TL;DR——"朋友的质疑大体正确，但有一处关键错位"。WHOOP/Oura 用户付的是一个早晨数字 + 一个身份，不是 AI；但无屏正是 AI 长期赢 wearable 的必需形态。软件差异化空间真实存在但很窄——具体是 4 个 gap，所有现有 app 都没做。
 
 ## 文件索引
 
 | # | 文件 | 主题 | 关键发现 |
 |---|---|---|---|
-| 00 | [00-source-article-and-conversation.md](00-source-article-and-conversation.md) | 原文 + 对话 + 6 个可验证质疑 | 调研缘起；朋友的 6 个质疑结构化版 |
-| 01 | [01-whoop-user-voices.md](01-whoop-user-voices.md) | WHOOP 用户声音 | AI Coach 不在任何用户日常 loop；Whoopgate 完整还原；Garmin Body Battery 已威胁 WHOOP 核心 moat |
-| 02 | [02-oura-user-voices.md](02-oura-user-voices.md) | Oura 用户声音 | 40% Oura 用户也戴 Apple Watch（CEO 承认）；女性健康是唯一 Oura 营销和现实重合的地方 |
-| 03 | [03-software-daily-ux.md](03-software-daily-ux.md) | 6 家 app 每日体验对比 | 没有一家做"打开 = 读一段教练叙事"；Fitbit/Google 在 2026 几乎无 unique feature |
-| 04 | [04-no-screen-positioning.md](04-no-screen-positioning.md) | 无屏品类传播机制 | 朋友"AI ≠ 无屏"对一半；屏幕缺席是 AI 不打扰分发的结构性前提 |
-| ★ | [synthesis-takeaways.md](synthesis-takeaways.md) | 合成结论 + 朋友 6 个质疑逐条对账 + nodie-fit 启示 | 4 个软件 gap：narrative home screen / 长期趋势 / 因果归因 / behavior→outcome 闭环 |
+| 00 | [00-source-article-and-conversation.md](/zh/blog/fitness-wearables-user-voices/00-source/) | 原文 + 对话 + 6 个可验证质疑 | 调研缘起；朋友的 6 个质疑结构化版 |
+| 01 | [01-whoop-user-voices.md](/zh/blog/fitness-wearables-user-voices/01-whoop/) | WHOOP 用户声音 | AI Coach 不在任何用户日常 loop；Whoopgate 完整还原；Garmin Body Battery 已威胁 WHOOP 核心 moat |
+| 02 | [02-oura-user-voices.md](/zh/blog/fitness-wearables-user-voices/02-oura/) | Oura 用户声音 | 40% Oura 用户也戴 Apple Watch（CEO 承认）；女性健康是唯一 Oura 营销和现实重合的地方 |
+| 03 | [03-software-daily-ux.md](/zh/blog/fitness-wearables-user-voices/03-software-ux/) | 6 家 app 每日体验对比 | 没有一家做"打开 = 读一段教练叙事"；Fitbit/Google 在 2026 几乎无 unique feature |
+| 04 | [04-no-screen-positioning.md](/zh/blog/fitness-wearables-user-voices/04-no-screen/) | 无屏品类传播机制 | 朋友"AI ≠ 无屏"对一半；屏幕缺席是 AI 不打扰分发的结构性前提 |
+| 05 | [05-ai-coach-deep-dive.md](/zh/blog/fitness-wearables-user-voices/05-ai-coach/) | AI Coach 深挖（GPT 前后情绪 + 跨产品反馈 + 付费意愿阶梯） | WHOOP 2022 vs 2026 取消理由逐字相同；Oura Advisor 60% 周活 / 87% feels-remembered；**$30 到 $150/月是产品墓地** |
+| 06 | [06-willingness-to-pay.md](/zh/blog/fitness-wearables-user-voices/06-willingness-to-pay/) | 付费意愿阶梯完整版 | WHOOP 退订点 18-24 个月；Life-tier 高阶 feature 是 price-discrimination 不是 retention；Future $199/月卖"someone is expecting me" |
+| ★ | [synthesis-takeaways.md](/zh/blog/fitness-wearables-user-voices/synthesis/) | 第一轮合成（朋友 6 个质疑对账 + nodie-fit 启示） | 4 个软件 gap：narrative home / 长期趋势 / 因果归因 / behavior→outcome 闭环 |
 
 ## 一页结论
 
