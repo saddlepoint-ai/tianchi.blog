@@ -29,6 +29,8 @@ sourcePath: "claude-workspace/public/wiki/research/2026-05-13-fitness-wearable-u
 | 04 | [04-no-screen-positioning.md](/zh/blog/fitness-wearables-user-voices/04-no-screen/) | 无屏品类传播机制 | 朋友"AI ≠ 无屏"对一半；屏幕缺席是 AI 不打扰分发的结构性前提 |
 | 05 | [05-ai-coach-deep-dive.md](/zh/blog/fitness-wearables-user-voices/05-ai-coach/) | AI Coach 深挖（GPT 前后情绪 + 跨产品反馈 + 付费意愿阶梯） | WHOOP 2022 vs 2026 取消理由逐字相同；Oura Advisor 60% 周活 / 87% feels-remembered；**$30 到 $150/月是产品墓地** |
 | 06 | [06-willingness-to-pay.md](/zh/blog/fitness-wearables-user-voices/06-willingness-to-pay/) | 付费意愿阶梯完整版 | WHOOP 退订点 18-24 个月；Life-tier 高阶 feature 是 price-discrimination 不是 retention；Future $199/月卖"someone is expecting me" |
+| 07 | [07-ai-coach-landscape-round-2.md](/zh/blog/fitness-wearables-user-voices/07-ai-coach-landscape/) | 20+ less-covered AI coach app 调研 | **3 个真正"knows me"赢家**：Athletica (耐力) / Humango (三铁) / HRV4Training (主观+客观融合)；**没人做大众健身 + recovery-aware + 对话式**的交集 |
+| 08 | [08-adaptive-training-product-wedge.md](/zh/blog/fitness-wearables-user-voices/08-adaptive-training/) | Adaptive training 全景 + nodie-fit 产品 wedge | **TrainerRoad RLGL 是 gold standard，Garmin DSW 有"死亡螺旋"风险**；产品 wedge：3x/周 gym-goer + Apple Watch + 无赛事；$9-15/月 |
 | ★ | [synthesis-takeaways.md](/zh/blog/fitness-wearables-user-voices/synthesis/) | 第一轮合成（朋友 6 个质疑对账 + nodie-fit 启示） | 4 个软件 gap：narrative home / 长期趋势 / 因果归因 / behavior→outcome 闭环 |
 
 ## 一页结论
